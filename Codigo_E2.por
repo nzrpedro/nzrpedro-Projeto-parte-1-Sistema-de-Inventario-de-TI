@@ -5,11 +5,11 @@ programa
         cadeia ativos[3]
         inteiro estoque[3][2]
         inteiro opcao
+        inteiro idEquipamento, qtdChegando
 
         ativos[0] = "Notebooks"
         ativos[1] = "Monitores"
         ativos[2] = "Teclados"
-
 
         estoque[0][0] = 3
         estoque[0][1] = 10
@@ -36,14 +36,41 @@ programa
             escolha(opcao)
             {
                 caso 1:
-                    escreva("Logica do relatorio entrara aqui\n") // colocar logica
+                    escreva("\n--- RELATORIO DE ESTOQUE DE TI ---\n")
+                    para (inteiro i = 0; i < 3; i++)
+                    {
+                        escreva("ID: ", i, " | Nome: ", ativos[i], " | Qtd Atual: ", estoque[i][0], " | Qtd Minima: ", estoque[i][1], "\n")
+                        
+                        se (estoque[i][0] < estoque[i][1])
+                        {
+                            escreva("⚠ Estoque crítico! Necessário abrir chamado de compra.\n")
+                        }
+                    }
                 pare
+                
                 caso 2:
-                    escreva("Logica do registro de recebimento entrara aqui\n") //colocar logica
+                    escreva("\n--- REGISTRAR RECEBIMENTO ---\n")
+                    escreva("Digite o ID do equipamento (0 a 2): ")
+                    leia(idEquipamento)
+
+                    se (idEquipamento >= 0 e idEquipamento <= 2)
+                    {
+                        escreva("Digite a quantidade que esta chegando: ")
+                        leia(qtdChegando)
+
+                        estoque[idEquipamento][0] = estoque[idEquipamento][0] + qtdChegando
+                        escreva("Recebimento registrado com sucesso! Nova quantidade de ", ativos[idEquipamento], ": ", estoque[idEquipamento][0], "\n")
+                    }
+                    senao
+                    {
+                        escreva("Erro: ID inválido! O ID deve ser entre 0 e 2.\n")
+                    }
                 pare
+                
                 caso 3:
                     escreva("Encerrando o sistema...\n")
                 pare
+                
                 caso contrario:
                     escreva("Opcao invalida! Por favor, escolha 1, 2 ou 3.\n")
                 pare
@@ -51,14 +78,3 @@ programa
         }
     }
 }
-/* $$$ Portugol Studio $$$ 
- * 
- * Esta seção do arquivo guarda informações do Portugol Studio.
- * Você pode apagá-la se estiver utilizando outro editor.
- * 
- * @POSICAO-CURSOR = 318; 
- * @PONTOS-DE-PARADA = ;
- * @SIMBOLOS-INSPECIONADOS = ;
- * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
- * @FILTRO-ARVORE-TIPOS-DE-SIMBOLO = variavel, vetor, matriz, funcao;
- */
